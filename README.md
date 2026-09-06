@@ -19,20 +19,20 @@ FedDyn improves federated optimization under heterogeneous client data by adding
 
 ## Method
 
-For client `k` at communication round `t`, the local update is:
+For client $k$ at communication round $t$, the local update is:
 
-```text
-Delta theta_k^t = theta_k^t - theta^{t-1}
+```math
+\Delta \theta_k^t = \theta_k^t - \theta^{t-1}
 ```
 
-The FedDyn-aware Parameter Importance (FPI) score for parameter `i` is:
+The FedDyn-aware Parameter Importance (FPI) score for parameter $i$ is:
 
-```text
-I_{k,i}^t =
-abs((grad L_k(theta_k^t)_i - grad L_k(theta_k^{t-1})_i) * Delta theta_{k,i}^t)
+```math
+I_{k,i}^{t} = \left| \left( \nabla L_k(\theta_k^t)_i - \nabla L_k(\theta_k^{t-1})_i \right) \Delta \theta_{k,i}^{t} \right|
 ```
 
-Parameters are ranked by FPI and the largest `rho` fraction is selected for upload. `rho = 1.0` means full communication; `rho = 0.1` means the top 10 percent of parameters are selected.
+Parameters are ranked by FPI, and the largest $\rho$ fraction is selected for upload.  
+$\rho = 1.0$ means full communication, while $\rho = 0.1$ means that the top 10% of parameters are selected.
 
 ## Repository Structure
 
@@ -149,34 +149,22 @@ rs_train_loss
 
 ## Communication Metric
 
-The paper reports normalized communication cost:
-
-```text
-C = R(rho) * rho
-```
-
-where `R(rho)` is the number of communication rounds required to reach a target accuracy threshold. The current code does not compute this metric automatically and does not measure byte-level network traffic or index overhead.
-
 To summarize the provided compression curves:
 
 ```bash
 python scripts/summarize_results.py
 ```
 
-## Known Differences Between Paper Formula and Current Code
-
-- The FPI implementation uses the previous communication round's saved gradient as `prev_grad_vector`; it does not recompute the starting gradient at the current received global model.
-- The Top-rho ranking is global over the flattened whole model, not layer-wise.
-- All trainable parameters are included in the ranking.
-- The server receives reconstructed model objects rather than an actual sparse network payload.
-- Existing result files have different curve lengths across methods and datasets.
-
 ## Citation
 
 ```bibtex
-@misc{feddyn_fpi_compression,
-  title = {A Communication-Efficient Compression Method for FedDyn Federated Learning Models},
-  note = {Add full citation information after publication}
+@inproceedings{chen2026communication,
+  author    = {Chen, Jiale},
+  title     = {A Communication-Efficient Compression Method for {FedDyn} Federated Learning Models},
+  booktitle = {2026 IEEE 4th International Conference on Control, Electronics and Computer Technology (ICCECT)},
+  pages     = {109--113},
+  year      = {2026},
+  doi       = {10.1109/ICCECT68671.2026.11565412}
 }
 ```
 
