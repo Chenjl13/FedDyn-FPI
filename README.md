@@ -4,20 +4,18 @@ This repository contains the research code for a FedDyn-aware communication comp
 
 The goal is to reduce the client-to-server communication overhead of FedDyn by selectively transmitting important model updates while largely preserving convergence behavior.
 
+<p align="center">
+  <a href="https://chenjl13.github.io/assets/files/ICCECT.pdf">📑 Paper</a>
+</p>
+
+
+
 ## Overview
 
 FedDyn improves federated optimization under heterogeneous client data by adding dynamic regularization to local training. This project keeps the FedDyn local optimization process intact and applies compression only after local training, during the client-to-server communication stage.
 
-```mermaid
-flowchart TD
-    A[Global model] --> B[FedDyn local training]
-    B --> C[Local update Delta theta]
-    C --> D[Gradient change]
-    D --> E[FedDyn-aware parameter importance]
-    E --> F[Top-rho parameter selection]
-    F --> G[Compressed update]
-    G --> H[Server aggregation]
-```
+## New Proposed Architecture
+<img src="imgs/Architecture.png">
 
 ## Method
 
