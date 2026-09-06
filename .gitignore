@@ -1,0 +1,44 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Local environments and secrets
+.env
+.venv/
+venv/
+env/
+
+# IDE/editor files
+.vscode/
+.idea/
+.DS_Store
+
+# Runtime logs and experiment scratch space
+*.log
+runs/
+wandb/
+logs/
+tmp/
+cache/
+items/
+
+# Model checkpoints
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+system/models/
+
+# Dataset caches and generated client shards
+dataset/*/rawdata/
+dataset/*/train/
+dataset/*/test/
+dataset/utils/LEAF/data/
+
+# Keep lightweight dataset metadata if intentionally committed
+!dataset/*/config.json
+
+# Keep curated paper result files, ignore ad-hoc result outputs by default
+results/tmp/
+results/logs/
